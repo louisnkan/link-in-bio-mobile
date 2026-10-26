@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080914">
+  <meta name="description" content="Explore my work, social media, and latest projects through one simple link.">
+  <title>Creator | Link in Bio</title>
+
+  <style>
+    :root {
+      --bg: #080914;
+      --text: #f8f8ff;
+      --muted: #a5a5bd;
+      --purple: #a855f7;
+      --blue: #3b82f6;
+      --glass: rgba(255, 255, 255, 0.055);
+      --border: rgba(255, 255, 255, 0.12);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      min-height: 100%;
+      color-scheme: dark;
+    }
+
+    body {
+      min-height: 100vh;
+      min-height: 100svh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 28px 18px;
+      overflow-x: hidden;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      position: relative;
+      isolation: isolate;
+    }
+
+    /* Animated ambient background */
+    .background {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      overflow: hidden;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse at 15% 15%, rgba(88, 28, 135, 0.22), transparent 48%),
+        radial-gradient(ellipse at 85% 85%, rgba(29, 78, 216, 0.19), transparent 48%),
+        #080914;
+    }
+
+    .orb {
+      position: absolute;
+      width: 350px;
+      height: 350px;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.36;
+      animation: drift 16s ease-in-out infinite alternate;
+    }
+
+    .orb-purple {
+      background: #7c3aed;
+      top: -150px;
+      left: -120px;
+    }
+
+    .orb-blue {
+      background: #2563eb;
+      right: -160px;
+      bottom: -130px;
+      animation-delay: -8s;
+    }
+
+    .orb-pink {
+      width: 220px;
+      height: 220px;
+      background: #9333ea;
+      top: 42%;
+      left: 65%;
+      opacity: 0.16;
+      animation-duration: 21s;
+      animation-delay: -4s;
+    }
+
+    @keyframes drift {
+      from {
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+      to {
+        transform: translate3d(50px, 65px, 0) scale(1.2);
+      }
+    }
+
+    /* Fine background texture */
+    .noise {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0.12;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.17'/%3E%3C/svg%3E");
+    }
+
+    /* Main profile card */
+    .profile-card {
+      width: 100%;
+      max-width: 430px;
+      padding: 34px 25px 24px;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      background: linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.085),
+        rgba(255, 255, 255, 0.025)
+      );
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      box-shadow:
+        0 25px 80px rgba(0, 0, 0, 0.42),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      animation: appear 0.8s ease-out both;
+    }
+
+    .profile-card::before {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      top: -170px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      background: var(--purple);
+      filter: blur(90px);
+      opacity: 0.25;
+      pointer-events: none;
+    }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Profile picture placeholder */
+    .avatar-wrap {
+      position: relative;
+      width: 108px;
+      height: 108px;
+      margin: 0 auto 20px;
+      padding: 4px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #c084fc, #6366f1, #60a5fa);
+      box-shadow:
+        0 0 25px rgba(168, 85, 247, 0.28),
+        0 0 50px rgba(59, 130, 246, 0.12);
+    }
+
+    .avatar {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      border: 3px solid #111020;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #25203f, #121a35);
+      font-size: 42px;
+      user-select: none;
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .status-dot {
+      position: absolute;
+      right: 5px;
+      bottom: 5px;
+      width: 17px;
+      height: 17px;
+      border: 3px solid #111020;
+      border-radius: 50%;
+      background: #34d399;
+      box-shadow: 0 0 12px rgba(52, 211, 153, 0.65);
+    }
+
+    .username {
+      margin-bottom: 9px;
+      font-size: 25px;
+      font-weight: 750;
+      letter-spacing: -0.8px;
+      line-height: 1.3;
+    }
+
+    .verified {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 17px;
+      height: 17px;
+      margin-left: 4px;
+      border-radius: 50%;
+      background: #818cf8;
+      color: white;
+      font-size: 11px;
+      vertical-align: 3px;
+    }
+
+    .tagline {
+      margin-bottom: 12px;
+      color: #d3c5ff;
+      font-size: 12px;
+      font-weight: 650;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .bio {
+      max-width: 310px;
+      margin: 0 auto 26px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    /* Social and business buttons */
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+    }
+
+    .link-button {
+      --glow: rgba(168, 85, 247, 0.32);
+
+      display: flex;
+      position: relative;
+      align-items: center;
+      gap: 13px;
+      width: 100%;
+      min-height: 60px;
+      padding: 12px 15px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      border-radius: 15px;
+      background: var(--glass);
+      color: var(--text);
+      text-decoration: none;
+      text-align: left;
+      transition:
+        transform 0.3s ease,
+        background 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .link-button::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        105deg,
+        transparent 15%,
+        rgba(255, 255, 255, 0.075) 50%,
+        transparent 85%
+      );
+      transform: translateX(-120%);
+      transition: transform 0.65s ease;
+      pointer-events: none;
+    }
+
+    .link-button:hover::before {
+      transform: translateX(120%);
+    }
+
+    .link-button:hover,
+    .link-button:focus-visible {
+      transform: translateY(-3px);
+      border-color: rgba(192, 132, 252, 0.7);
+      background: rgba(168, 85, 247, 0.09);
+      box-shadow:
+        0 8px 28px var(--glow),
+        inset 0 0 16px rgba(168, 85, 247, 0.045);
+      outline: none;
+    }
+
+    .link-button:active {
+      transform: translateY(-1px) scale(0.99);
+    }
+
+    .link-button:nth-child(2) {
+      --glow: rgba(96, 165, 250, 0.28);
+    }
+
+    .link-button:nth-child(2):hover {
+      border-color: rgba(96, 165, 250, 0.7);
+      background: rgba(59, 130, 246, 0.08);
+    }
+
+    .link-button:nth-child(3) {
+      --glow: rgba(244, 114, 182, 0.25);
+    }
+
+    .link-button:nth-child(3):hover {
+      border-color: rgba(244, 114, 182, 0.65);
+      background: rgba(236, 72, 153, 0.07);
+    }
+
+    .link-button:nth-child(4) {
+      --glow: rgba(45, 212, 191, 0.23);
+    }
+
+    .link-button:nth-child(4):hover {
+      border-color: rgba(45, 212, 191, 0.65);
+      background: rgba(20, 184, 166, 0.07);
+    }
+
+    .link-button:nth-child(5) {
+      --glow: rgba(250, 204, 21, 0.18);
+    }
+
+    .link-button:nth-child(5):hover {
+      border-color: rgba(250, 204, 21, 0.55);
+      background: rgba(250, 204, 21, 0.045);
+    }
+
+    .link-icon {
+      display: flex;
+      flex-shrink: 0;
+      justify-content: center;
+      align-items: center;
+      width: 36px;
+      height: 36px;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 11px;
+      background: rgba(255, 255, 255, 0.065);
+      font-size: 17px;
+    }
+
+    .link-copy {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      gap: 3px;
+      min-width: 0;
+    }
+
+    .link-title {
+      font-size: 14px;
+      font-weight: 650;
+      letter-spacing: 0.1px;
+    }
+
+    .link-description {
+      overflow: hidden;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 400;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .arrow {
+      flex-shrink: 0;
+      color: #777b9b;
+      font-size: 20px;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .link-button:hover .arrow {
+      color: #d8b4fe;
+      transform: translateX(4px);
+    }
+
+    /* Footer */
+    .footer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 7px;
+      margin-top: 27px;
+      color: #74758f;
+      font-size: 11px;
+      letter-spacing: 0.5px;
+    }
+
+    .footer-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #a78bfa;
+      box-shadow: 0 0 9px rgba(167, 139, 250, 0.8);
+    }
+
+    .footer a {
+      color: #aaa5c8;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .footer a:hover {
+      color: #d8b4fe;
+    }
+
+    /* Small screens */
+    @media (max-width: 380px) {
+      body {
+        padding: 18px 12px;
+      }
+
+      .profile-card {
+        padding: 28px 17px 21px;
+        border-radius: 23px;
+      }
+
+      .username {
+        font-size: 23px;
+      }
+
+      .link-button {
+        padding: 11px 12px;
+      }
+    }
+
+    /* Respect reduced-motion preferences */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="background" aria-hidden="true">
+    <div class="orb orb-purple"></div>
+    <div class="orb orb-blue"></div>
+    <div class="orb orb-pink"></div>
+  </div>
+
+  <div class="noise" aria-hidden="true"></div>
+
+  <main class="profile-card">
+    <!-- PROFILE PICTURE
+         Replace the emoji with an image using the instructions below. -->
+    <div class="avatar-wrap">
+      <div class="avatar" id="avatar">
+        <span aria-label="Profile picture placeholder">👨🏽‍💻</span>
+      </div>
+      <span class="status-dot" title="Available online"></span>
+    </div>
+
+    <!-- CREATOR INFORMATION -->
+    <h1 class="username">
+      @yourusername
+      <span class="verified" aria-label="Verified creator">✓</span>
+    </h1>
+
+    <p class="tagline">Creator · Builder · Dreamer</p>
+
+    <p class="bio">
+      Creating cool things with code, AI, and a little creativity.
+      Follow the journey and let's build something amazing.
+    </p>
+
+    <!-- FIVE SOCIAL / BUSINESS LINKS
+         Replace each example URL with your actual destination. -->
+    <nav class="links" aria-label="Social media and business links">
+
+      <a
+        class="link-button"
+        href="https://youtube.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Visit my YouTube channel"
+      >
+        <span class="link-icon" aria-hidden="true">▶</span>
+        <span class="link-copy">
+          <span class="link-title">YouTube Channel</span>
+          <span class="link-description">Watch my latest creations</span>
+        </span>
+        <span class="arrow" aria-hidden="true">↗</span>
+      </a>
+
+      <a
+        class="link-button"
+        href="https://github.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Explore my GitHub projects"
+      >
+        <span class="link-icon" aria-hidden="true">⌘</span>
+        <span class="link-copy">
+          <span class="link-title">GitHub Projects</span>
+          <span class="link-description">Code, experiments & builds</span>
+        </span>
+        <span class="arrow" aria-hidden="true">↗</span>
+      </a>
+
+      <a
+        class="link-button"
+        href="https://instagram.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Follow me on Instagram"
+      >
+        <span class="link-icon" aria-hidden="true">◎</span>
+        <span class="link-copy">
+          <span class="link-title">Instagram</span>
+          <span class="link-description">Behind the scenes & updates</span>
+        </span>
+        <span class="arrow" aria-hidden="true">↗</span>
+      </a>
+
+      <a
+        class="link-button"
+        href="https://wa.me/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Contact me on WhatsApp"
+      >
+        <span class="link-icon" aria-hidden="true">✆</span>
+        <span class="link-copy">
+          <span class="link-title">Let's Connect</span>
+          <span class="link-description">Business inquiries & collaboration</span>
+        </span>
+        <span class="arrow" aria-hidden="true">↗</span>
+      </a>
+
+      <a
+        class="link-button"
+        href="https://linkedin.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Connect with me on LinkedIn"
+      >
+        <span class="link-icon" aria-hidden="true">in</span>
+        <span class="link-copy">
+          <span class="link-title">LinkedIn</span>
+          <span class="link-description">Professional journey & opportunities</span>
+        </span>
+        <span class="arrow" aria-hidden="true">↗</span>
+      </a>
+
+    </nav>
+
+    <footer class="footer">
+      <span class="footer-dot" aria-hidden="true"></span>
+      <span>MADE WITH CREATIVITY</span>
+      <span>·</span>
+      <a href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">BACK TO TOP ↑</a>
+    </footer>
+  </main>
+
+  <script>
+    /*
+      QUICK CUSTOMIZATION
+      1. Edit the username, tagline and bio directly in the HTML.
+      2. Replace the five example href values with your real links.
+      3. To use your own profile picture, replace the contents of
+         the element with id="avatar" with:
+
+         <img src="profile.jpg" alt="Your profile picture">
+
+         Keep profile.jpg in the same folder as index.html.
+    */
+
+    // Add a subtle entrance delay to each link.
+    document.querySelectorAll(".link-button").forEach((button, index) => {
+      button.style.animation = `appear 0.55s ease-out ${0.12 + index * 0.09}s both`;
+    });
+  </script>
+</body>
+</html>
